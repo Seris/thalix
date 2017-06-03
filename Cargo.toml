@@ -1,0 +1,10 @@
+[package]
+name = "thalix"
+version = "0.1.0"
+authors = ["thalya <seris@protonmail.ch>"]
+
+[dependencies]
+rlibc = "1.0"
+
+[lib]
+crate-type = ["staticlib"]
