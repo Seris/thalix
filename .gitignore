@@ -1,6 +1,7 @@
 target
 Cargo.lock
-build/src
-build/isoroot/boot/thalix
-thalix.iso
 *.log
+*.pid
+*.iso
+build/isoroot/boot/thalix
+build/src

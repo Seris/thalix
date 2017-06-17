@@ -1,3 +1,7 @@
+global kernel_entry
+global multiboot_address
+extern setup_long_mode
+
 section .multiboot_header
 header_start:
 	dd 0xe85250d6 ; multiboot2 magic
@@ -10,8 +14,9 @@ header_start:
 	dd 8
 header_end:
 
-global kernel_entry
-extern setup_long_mode
+section .data
+multiboot_address:
+	dd 0
 
 section .text
 bits 32
@@ -22,6 +27,8 @@ kernel_entry:
 	cli
 
 	call check_multiboot
+	mov [multiboot_address], ebx
+
 	call check_cpuid
 	call check_longmode
 
