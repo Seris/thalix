@@ -1,6 +1,6 @@
 use core;
-use boot::vga_buffer::Color;
-use boot::vga_buffer;
+use super::boot::vga_buffer::Color;
+use super::boot::vga_buffer;
 
 #[no_mangle]
 #[lang = "panic_fmt"]

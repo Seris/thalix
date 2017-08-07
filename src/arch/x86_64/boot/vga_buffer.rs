@@ -150,17 +150,6 @@ impl Writer {
 
 pub static WRITER: Mutex<Writer> = Mutex::new(Writer::new());
 
-macro_rules! early_kprint {
-	($($arg:tt)*) => {
-		$crate::boot::vga_buffer::early_kprint(format_args!($($arg)*));
-	}
-}
-
-macro_rules! early_kprintln {
-	($fmt:expr) => { early_kprint!(concat!($fmt, "\n")) };
-	($fmt:expr, $($arg:tt)*) => { early_kprint!(concat!($fmt, "\n"), $($arg)*) };
-}
-
 pub fn early_kprint(args: fmt::Arguments){
 	use core::fmt::Write;
 	let mut guard = WRITER.lock();
@@ -175,4 +164,15 @@ pub fn clear_screen(){
 pub fn set_color(foreground: Color, background: Color){
 	let mut guard = WRITER.lock();
 	guard.set_color(foreground, background);
+}
+
+macro_rules! early_kprint {
+	($($arg:tt)*) => {
+		$crate::arch::x86_64::vga_buffer::early_kprint(format_args!($($arg)*));
+	}
+}
+
+macro_rules! early_kprintln {
+	($fmt:expr) => { early_kprint!(concat!($fmt, "\n")) };
+	($fmt:expr, $($arg:tt)*) => { early_kprint!(concat!($fmt, "\n"), $($arg)*) };
 }

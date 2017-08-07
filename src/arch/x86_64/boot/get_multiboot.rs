@@ -1,4 +1,4 @@
-use multiboot2;
+use super::multiboot2;
 
 extern "C" {
 	static multiboot_address: u32;
